@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BanHangOnline">
+  <DataContextMoniker Name="/BanHangOnlineDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9151f7e5-809a-4870-aa68-d8d329132b60" absoluteBounds="3.125, 1, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/BanHangOnlineDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="749fd6ad-e212-4882-b9c2-5cb19e30b2ab" absoluteBounds="3.1399999999999997, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="565f1f22-c7f0-4477-b93d-259569c73f35" absoluteBounds="5.875, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BanHangOnlineDataContext/SanPham" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0979441f-26ca-4522-8550-c2aea4a78a6d" absoluteBounds="5.8900000000000006, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e6e6a0a9-5159-4b34-8b2b-3b61f4f3a00b" absoluteBounds="3.125, 5, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/BanHangOnlineDataContext/TheLoai" />
+      <nestedChildShapes>
+        <elementListCompartment Id="95d1c520-542e-49ca-a95b-0d0abec61f72" absoluteBounds="3.1399999999999997, 5.4600000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.82431705603966 : 2.3862939453125); (3.82431705603966 : 2.6362939453125); (4.44000117938702 : 2.6362939453125); (4.44000117938702 : 2.3862939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BanHangOnlineDataContext/Account/Account_Account" />
+      <nodes>
+        <classShapeMoniker Id="9151f7e5-809a-4870-aa68-d8d329132b60" />
+        <classShapeMoniker Id="9151f7e5-809a-4870-aa68-d8d329132b60" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 1.69314697265625); (5.875 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BanHangOnlineDataContext/Account/Account_SanPham" />
+      <nodes>
+        <classShapeMoniker Id="9151f7e5-809a-4870-aa68-d8d329132b60" />
+        <classShapeMoniker Id="565f1f22-c7f0-4477-b93d-259569c73f35" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 5.59699625651042); (6.875 : 5.59699625651042); (6.875 : 2.65549967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BanHangOnlineDataContext/TheLoai/TheLoai_SanPham" />
+      <nodes>
+        <classShapeMoniker Id="e6e6a0a9-5159-4b34-8b2b-3b61f4f3a00b" />
+        <classShapeMoniker Id="565f1f22-c7f0-4477-b93d-259569c73f35" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
