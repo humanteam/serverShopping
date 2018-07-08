@@ -134,10 +134,16 @@ namespace BanHangOnline.WebServices
             try
             {
                 BanHangOnlineDataContext context = new BanHangOnlineDataContext();
-                List<SanPham> ds = context.SanPhams.Where(x => x.MaSP == ma).ToList();
-                if (ds.Count > 0)
+                SanPham sp = context.SanPhams.FirstOrDefault(x => x.MaSP == ma);
+                if (sp != null)
                 {
-                    
+                    context.SanPhams.DeleteOnSubmit(sp);
+                    context.SubmitChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch
@@ -162,3 +168,6 @@ namespace BanHangOnline.WebServices
         }
     }
 }
+
+[WebMethod]
+public 
