@@ -166,8 +166,69 @@ namespace BanHangOnline.WebServices
             }
             return false;
         }
+        
+        [WebMethod]
+        public bool edit_sanpham(int ma,string ten,string anh,
+            string giasp,string chitietsp,
+            string matheloai,string mausername)
+        {
+            BanHangOnlineDataContext context = new BanHangOnlineDataContext();
+            SanPham sp = context.SanPhams.FirstOrDefault(x => x.MaSP == ma);
+            try
+            {
+                if (sp != null)
+                {
+                    if (sp.MaSP == ma)
+                    {
+                        bool check_ten = false, check_anh = false, check_gia = false, check_chitiet = false;
+                           
+                        //check ten
+                        if (ten == null || ten == "" || String.Compare("", ten) == 0)
+                        {
+                            check_ten = true;
+                        }
+                        if (anh == null || anh == "" || String.Compare("", anh)==0){
+                            check_anh = true;
+                        }
+                        if (giasp == null || giasp == "" || String.Compare("", giasp) == 0)
+                        {
+                            check_gia = true;
+                        }
+                        if (chitietsp == null || chitietsp == "" || String.Compare(chitietsp, "") == 0)
+                        {
+                            check_chitiet = false;
+                        }
+
+                        if (check_ten)
+                        {
+                            sp.TenSP = ten;
+                        }
+                        if (check_anh)
+                        {
+                            sp.AnhSP = anh;
+                        }
+                        if (check_chitiet)
+                        {
+                            sp.ChiTietSP = chitietsp;
+                        }
+                        if (check_gia)
+                        {
+                            sp.GiaSP = Double.Parse(giasp);
+                        }
+                        return true;
+                       
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        } 
     }
 }
-
-[WebMethod]
-public 
