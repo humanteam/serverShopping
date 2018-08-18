@@ -57,7 +57,7 @@ namespace BanHangOnline.WebServices
             }
             catch
             {
-
+                return false;
             }
             return false;
         }
@@ -87,10 +87,45 @@ namespace BanHangOnline.WebServices
             return false;
         }
 
+        private void saveDonHang(string tenkhachhang,string donhang)
+        {
+            string madonhang = "";
+            int MaSP = 0;
+            string tenKh = "";
+            string sdt = "";
+            string soluong = "4";
+            tenKh = tenkhachhang;
+
+                soluong = donhang.Substring(donhang.IndexOf("Số lượng:"), donhang.IndexOf("Thành tiền:")).Trim();
+                sdt = donhang.Substring(donhang.IndexOf("Số điện thoại:"),donhang.LastIndexOf("Mã sản phẩm:")).Trim();
+                madonhang = donhang.Substring(donhang.IndexOf("ID Đơn hàng:"), donhang.Length);
+                MaSP = Int32.Parse(donhang.Substring(donhang.IndexOf("Mã sản phẩm:"), donhang.IndexOf("Mã Thể Loại:")).Trim());
+           
+                BanHangOnlineDataContext context = new BanHangOnlineDataContext();
+                DonHang dh = new DonHang();
+            dh.TenKhachHang = tenkhachhang;
+            dh.SoDienThoai = sdt;
+            dh.MaSP = MaSP;
+            dh.MaDonHang = madonhang;
+            dh.SoLuong = soluong;
+                context.DonHangs.InsertOnSubmit(dh);
+                context.SubmitChanges();
+        }
+
         //send email
         [WebMethod]
         public bool send_mail(string tenkhachhang,string donhang)
         {
+
+            //save don hang
+            try
+            {
+                saveDonHang(tenkhachhang, donhang);
+            } catch (Exception e)
+            {
+              
+            }
+            //sent mail
             try
             {
                 var from_email = new MailAddress("chi.yeu.minh.em.200895@gmail.com", "Nguyễn Công");
@@ -180,42 +215,31 @@ namespace BanHangOnline.WebServices
                 {
                     if (sp.MaSP == ma)
                     {
-                        bool check_ten = false, check_anh = false, check_gia = false, check_chitiet = false;
-                           
-                        //check ten
-                        if (ten == null || ten == "" || String.Compare("", ten) == 0)
-                        {
-                            check_ten = true;
-                        }
-                        if (anh == null || anh == "" || String.Compare("", anh)==0){
-                            check_anh = true;
-                        }
-                        if (giasp == null || giasp == "" || String.Compare("", giasp) == 0)
-                        {
-                            check_gia = true;
-                        }
-                        if (chitietsp == null || chitietsp == "" || String.Compare(chitietsp, "") == 0)
-                        {
-                            check_chitiet = false;
-                        }
-
-                        if (check_ten)
+                        if (ten.Length > 0 && ten !=null)
                         {
                             sp.TenSP = ten;
                         }
-                        if (check_anh)
+                        if(anh.Length>0 && anh != null)
                         {
                             sp.AnhSP = anh;
                         }
-                        if (check_chitiet)
+                        if(giasp.Length>0 && giasp != null)
+                        {
+                            try
+                            {
+                                sp.GiaSP = Double.Parse(giasp);
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
+                        if(chitietsp.Length>0 && chitietsp != null)
                         {
                             sp.ChiTietSP = chitietsp;
                         }
-                        if (check_gia)
-                        {
-                            sp.GiaSP = Double.Parse(giasp);
-                        }
-                        return true;
+                    
+                      return true;
                        
                     }
                     else

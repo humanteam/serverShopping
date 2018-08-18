@@ -19,6 +19,7 @@
       <Column Name="ChiTietSP" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MaTheLoai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MaUserName" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SanPham_DonHang" Member="DonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="DonHang" />
       <Association Name="Account_SanPham" Member="Account" ThisKey="MaUserName" OtherKey="MaUserName" Type="Account" IsForeignKey="true" />
       <Association Name="TheLoai_SanPham" Member="TheLoai" ThisKey="MaTheLoai" OtherKey="MaTheLoai" Type="TheLoai" IsForeignKey="true" />
     </Type>
@@ -28,6 +29,19 @@
       <Column Name="MaTheLoai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TenTheLoai" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Association Name="TheLoai_SanPham" Member="SanPhams" ThisKey="MaTheLoai" OtherKey="MaTheLoai" Type="SanPham" />
+      <Association Name="TheLoai_DonHang" Member="DonHangs" ThisKey="MaTheLoai" OtherKey="MaTheLoai" Type="DonHang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DonHang" Member="DonHangs">
+    <Type Name="DonHang">
+      <Column Name="MaDonHang" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenKhachHang" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SoDienThoai" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="MaTheLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SanPham_DonHang" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
+      <Association Name="TheLoai_DonHang" Member="TheLoai" ThisKey="MaTheLoai" OtherKey="MaTheLoai" Type="TheLoai" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
